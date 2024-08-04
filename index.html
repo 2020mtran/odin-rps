@@ -1,17 +1,52 @@
 <script>
-    console.log("Hello world!")
+    console.log("Hello world!");
+    humanScore = 0;
+    computerScore = 0;
 
     function getComputerChoice() {
-        choice = Math.floor(Math.random()*3)
-        console.log("Choice = " + choice)
+        choice = Math.floor(Math.random()*3);
+        console.log("Choice = " + choice);
         if (choice == 0) {
-            return "rock"
+            return "rock";
         } else if (choice == 1) {
-            return "paper" 
+            return "paper";
         } else if (choice == 2) {
-            return "scissors"
+            return "scissors";
         }
     }
 
-    console.log(getComputerChoice())
+    function getHumanChoice() {
+        choice = prompt("Rock, Paper, or Scissors?");
+        choice = choice.toLowerCase();
+        if (choice == "rock" || choice == "paper" || choice == "scissors") {
+            return choice;
+        } else {
+            console.log("Choice not valid, try again.");
+            return getHumanChoice();
+        }
+    }
+
+    function playRound(humanChoice, computerChoice) { 
+        if (humanChoice == "rock" && computerChoice == "scissors" ||
+            humanChoice == "paper" && computerChoice == "rock" ||
+            humanChoice == "scissors" && computerChoice == "paper") {
+                console.log(`You win, ${humanChoice} + beats ${computerChoice}!`);
+                humanScore += 1;
+            } else if (humanChoice == "rock" && computerChoice == "paper" ||
+                humanChoice == "paper" && computerChoice == "scissors" ||
+                humanChoice == "scissors" && computerChoice == "rock") {
+                    console.log(`Computer wins, ${computerChoice} beats ${humanChoice}.`);
+                    computerScore += 1;
+            } else if (humanChoice == "rock" && computerChoice == "rock" ||
+                humanChoice == "paper" && computerChoice == "paper" ||
+                humanChoice == "scissors" && computerChoice == "scissors") {
+                    console.log(`It's a tie! Both players picked: ${humanChoice}`);
+            }
+    } 
+
+    const humanSelection = getHumanChoice();
+    const computerSelection = getComputerChoice();
+    console.log("Computer: " + computerSelection);
+    console.log("Human: " + humanSelection);
+    playRound(humanSelection, computerSelection);
 </script>
